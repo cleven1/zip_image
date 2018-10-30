@@ -1,15 +1,15 @@
-!/usr/bin/env python3
+#!/usr/bin/env python
 # coding=utf-8
 
 # from os.path import dirname
 import os,sys, getopt
-from urllib.request import Request, urlopen
+from urllib2 import Request, urlopen
 from base64 import b64encode
 from multiprocessing import Pool
 
 # 最大线程数
 poolLimite = 10
-key = "请输入tinypng Key"
+key = "请输入tinypng key"
 opts, args = getopt.getopt(sys.argv[1:], "hi:o:r:")
 input_doc_path=""
 output_doc_path = ''
