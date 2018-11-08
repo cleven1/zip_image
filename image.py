@@ -6,12 +6,11 @@ import os,sys, getopt
 from urllib2 import Request, urlopen
 from base64 import b64encode
 from multiprocessing import Pool
-from PIL import Image
 import tinify
 
 # 最大线程数
 poolLimite = 10
-key = "***************"
+key = "********"
 opts, args = getopt.getopt(sys.argv[1:], "hi:o:r:")
 input_doc_path=""
 output_doc_path = ''
@@ -38,17 +37,13 @@ def absFilePath(fileName):
 
 
 def getImageData(filePath):
-    im = Image.open(filePath)
 
-    data = im.getdata()
-    # 计算兆
-    length = len(data) / 1024.0 / 1024.0
-
-    # 压缩大于0.5兆的图片
-    if length > 0.5:    
+    # 获取文件大小
+    length = os.path.getsize(filePath) / 1024.0
+    # 压缩大于150K的图片
+    if length > 150.0:
         getTinyPng(filePath)
-        # print filePath
-        print('宽：%d,高：%d' % (im.size[0], im.size[1]))
+        print filePath
         print  length
 
 def getTinyPng(filePath):

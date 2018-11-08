@@ -9,7 +9,7 @@ from multiprocessing import Pool
 
 # 最大线程数
 poolLimite = 10
-key = "***************"
+key = "Niljs2QgiqeJvVySVSItHXzJHBC1Ph40"
 opts, args = getopt.getopt(sys.argv[1:], "hi:o:r:")
 input_doc_path=""
 output_doc_path = ''
