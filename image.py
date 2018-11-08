@@ -46,8 +46,8 @@ def getImageData(filePath):
 
     # 压缩大于0.5兆的图片
     if length > 0.5:    
-        # getTinyPng(filePath)
-        print filePath
+        getTinyPng(filePath)
+        # print filePath
         print('宽：%d,高：%d' % (im.size[0], im.size[1]))
         print  length
 
