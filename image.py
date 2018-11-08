@@ -6,6 +6,8 @@ import os,sys, getopt
 from urllib2 import Request, urlopen
 from base64 import b64encode
 from multiprocessing import Pool
+from PIL import Image
+import tinify
 
 # 最大线程数
 poolLimite = 10
@@ -34,17 +36,34 @@ for op, value in opts:
 def absFilePath(fileName):
     return os.path.join(input_doc_path,fileName)
 
+
+def getImageData(filePath):
+    im = Image.open(filePath)
+
+    data = im.getdata()
+    # 计算兆
+    length = len(data) / 1024.0 / 1024.0
+
+    # 压缩大于0.5兆的图片
+    if length > 0.5:    
+        # getTinyPng(filePath)
+        print filePath
+        print('宽：%d,高：%d' % (im.size[0], im.size[1]))
+        print  length
+
 def getTinyPng(filePath):
     print('开始'+filePath)
+
     output = os.path.join(output_doc_path, os.path.relpath(filePath,input_doc_path))
     tinify.key = key
     tinify.from_file(filePath).to_file(output)
-    
+
 
 def main():
     global output_doc_path
     if output_doc_path == '':
         output_doc_path = os.path.join(os.path.split(input_doc_path)[0], 'outputTinypng')
+
     if not os.path.exists(output_doc_path):
         os.mkdir(output_doc_path)
 
@@ -65,7 +84,7 @@ def main():
     print('父进程id = %s.' % os.getpid())
     p = Pool(poolLimite)
     for fileName in pngFilePaths:
-        p.apply_async(getTinyPng, args=(fileName,))
+        p.apply_async(getImageData, args=(fileName,))
     print('等待所有子进程完成')
     p.close()
     p.join()

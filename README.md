@@ -1,6 +1,9 @@
 # 使用Python压缩图片资源
-zip_image批量压缩图片脚步,基于tinypng,支持子文件夹图片压缩,默认并发数10
+zip_image.py批量压缩图片脚步,image.py批量压缩大于0.5兆的图片,基于tinypng,支持子文件夹图片压缩,默认并发数10
 
+# 配置环境
+#### 安装 tinify
+`pip install tinify`
 # 使用方式
 ##### 执行时需要传递参数:
     1. -i 图片文件夹路径
